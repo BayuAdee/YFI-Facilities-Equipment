@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import api from './api/client';
 import Shell from './components/Layout/Shell';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import { ToastProvider } from './context/ToastContext';
 
 // Pages
 import PublicAsset from './pages/PublicAsset';
@@ -47,18 +48,20 @@ export default function MainApp() {
     }
 
     return (
-        <BrowserRouter>
-            <Shell user={user} onLogout={handleLogout}>
-                <Routes>
-                    <Route path="/a/:token" element={<PublicAsset user={user} />} />
-                    <Route path="/inspeksi/:token" element={<Inspection user={user} />} />
-                    <Route path="/dashboard" element={<Dashboard user={user} />} />
-                    <Route path="/admin" element={<Admin user={user} />} />
-                    <Route path="/login" element={<Login onLoginSuccess={(u) => setUser(u)} />} />
-                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                    <Route path="*" element={<Navigate to="/dashboard" replace />} />
-                </Routes>
-            </Shell>
-        </BrowserRouter>
+        <ToastProvider hasSidebar={Boolean(user)}>
+            <BrowserRouter>
+                <Shell user={user} onLogout={handleLogout}>
+                    <Routes>
+                        <Route path="/a/:token" element={<PublicAsset user={user} />} />
+                        <Route path="/inspeksi/:token" element={<Inspection user={user} />} />
+                        <Route path="/dashboard" element={<Dashboard user={user} />} />
+                        <Route path="/admin" element={<Admin user={user} />} />
+                        <Route path="/login" element={<Login onLoginSuccess={(u) => setUser(u)} />} />
+                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+                    </Routes>
+                </Shell>
+            </BrowserRouter>
+        </ToastProvider>
     );
 }

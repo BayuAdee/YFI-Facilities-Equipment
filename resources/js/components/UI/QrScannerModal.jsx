@@ -147,7 +147,7 @@ export default function QrScannerModal({ isOpen, onClose, user }) {
                         </div>
                         <div>
                             <h3 className="font-extrabold text-slate-900 text-base leading-tight">
-                                Scan QR Alat K3
+                                Scan QR Alat
                             </h3>
                             <p className="text-[11px] text-slate-600">Arahkan kamera ke stiker QR APAR</p>
                         </div>

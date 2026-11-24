@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import api from '../api/client';
 import { formatDate } from '../utils/date';
 import StatusBadge from '../components/UI/StatusBadge';
+import { useToast } from '../context/ToastContext';
 import {
     LuPlus,
     LuCircleCheck,
@@ -29,6 +30,7 @@ import {
 } from 'react-icons/lu';
 
 export default function Admin({ user: currentUser }) {
+    const toast = useToast();
     const [searchParams, setSearchParams] = useSearchParams();
     const activeTab = searchParams.get('tab') || 'assets';
     const setTab = (newTab) => {
@@ -100,8 +102,6 @@ export default function Admin({ user: currentUser }) {
         is_active: true,
     });
 
-    const [actionMsg, setActionMsg] = useState('');
-
     const refreshData = () => {
         setLoading(true);
         Promise.all([
@@ -124,13 +124,12 @@ export default function Admin({ user: currentUser }) {
         e.preventDefault();
         try {
             await api.post('/assets', assetForm);
-            setActionMsg('Alat keselamatan baru berhasil didaftarkan!');
+            toast.success('Alat keselamatan baru berhasil didaftarkan!');
             setShowAddAssetModal(false);
             setAssetForm({ code: '', asset_type_id: '', area_id: '', location_note: '', expiry_date: '' });
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menambahkan alat.');
+            toast.error(err.response?.data?.message || 'Gagal menambahkan alat.');
         }
     };
 
@@ -141,10 +140,9 @@ export default function Admin({ user: currentUser }) {
             await api.post('/areas', areaForm);
             setAreaForm({ name: '' });
             refreshData();
-            setActionMsg('Area baru berhasil ditambahkan!');
-            setTimeout(() => setActionMsg(''), 3000);
+            toast.success('Area baru berhasil ditambahkan!');
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menambahkan area.');
+            toast.error(err.response?.data?.message || 'Gagal menambahkan area.');
         }
     };
 
@@ -155,10 +153,9 @@ export default function Admin({ user: currentUser }) {
             await api.post('/asset-types', typeForm);
             setTypeForm({ name: '', inspection_interval_days: 30 });
             refreshData();
-            setActionMsg('Jenis alat baru berhasil ditambahkan!');
-            setTimeout(() => setActionMsg(''), 3000);
+            toast.success('Jenis alat baru berhasil ditambahkan!');
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menambahkan jenis alat.');
+            toast.error(err.response?.data?.message || 'Gagal menambahkan jenis alat.');
         }
     };
 
@@ -167,13 +164,12 @@ export default function Admin({ user: currentUser }) {
         e.preventDefault();
         try {
             await api.post('/users', userForm);
-            setActionMsg(`Petugas / Pengguna "${userForm.name}" berhasil didaftarkan!`);
+            toast.success(`Petugas / Pengguna "${userForm.name}" berhasil didaftarkan!`);
             setShowAddUserModal(false);
             setUserForm({ name: '', email: '', password: '', role: 'officer' });
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menambahkan pengguna.');
+            toast.error(err.response?.data?.message || 'Gagal menambahkan pengguna.');
         }
     };
 
@@ -195,19 +191,18 @@ export default function Admin({ user: currentUser }) {
         if (!editingUser) return;
         try {
             await api.put(`/users/${editingUser.id}`, editUserForm);
-            setActionMsg(`Data pengguna "${editUserForm.name}" berhasil diperbarui!`);
+            toast.success(`Data pengguna "${editUserForm.name}" berhasil diperbarui!`);
             setEditingUser(null);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal memperbarui pengguna.');
+            toast.error(err.response?.data?.message || 'Gagal memperbarui pengguna.');
         }
     };
 
     // Toggle User Active Status
     const handleToggleStatus = async (targetUser) => {
         if (targetUser.id === currentUser?.id) {
-            alert('Anda tidak dapat menonaktifkan akun Anda sendiri.');
+            toast.warning('Anda tidak dapat menonaktifkan akun Anda sendiri.');
             return;
         }
         const newStatus = !targetUser.is_active;
@@ -218,28 +213,26 @@ export default function Admin({ user: currentUser }) {
                 role: targetUser.role,
                 is_active: newStatus,
             });
-            setActionMsg(`Status akun "${targetUser.name}" diubah menjadi ${newStatus ? 'Aktif' : 'Nonaktif'}.`);
+            toast.success(`Status akun "${targetUser.name}" diubah menjadi ${newStatus ? 'Aktif' : 'Nonaktif'}.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal mengubah status pengguna.');
+            toast.error(err.response?.data?.message || 'Gagal mengubah status pengguna.');
         }
     };
 
     // Delete User
     const handleDeleteUser = async (targetUser) => {
         if (targetUser.id === currentUser?.id) {
-            alert('Anda tidak dapat menghapus akun Anda sendiri.');
+            toast.warning('Anda tidak dapat menghapus akun Anda sendiri.');
             return;
         }
         if (!confirm(`Konfirmasi hapus akun pengguna "${targetUser.name}" (${targetUser.email})?`)) return;
         try {
             await api.delete(`/users/${targetUser.id}`);
-            setActionMsg(`Akun "${targetUser.name}" berhasil dihapus.`);
+            toast.success(`Akun "${targetUser.name}" berhasil dihapus.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menghapus pengguna.');
+            toast.error(err.response?.data?.message || 'Gagal menghapus pengguna.');
         }
     };
 
@@ -248,7 +241,7 @@ export default function Admin({ user: currentUser }) {
         e.preventDefault();
         try {
             await api.post('/checklist-items', checklistForm);
-            setActionMsg('Poin checklist baru berhasil ditambahkan!');
+            toast.success('Poin checklist baru berhasil ditambahkan!');
             setShowAddChecklistModal(false);
             const currentTypeId = checklistForm.asset_type_id;
             if (currentTypeId) {
@@ -263,9 +256,8 @@ export default function Admin({ user: currentUser }) {
                 required: true,
             });
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menambahkan poin checklist.');
+            toast.error(err.response?.data?.message || 'Gagal menambahkan poin checklist.');
         }
     };
 
@@ -289,12 +281,11 @@ export default function Admin({ user: currentUser }) {
         if (!editingChecklist) return;
         try {
             await api.put(`/checklist-items/${editingChecklist.id}`, editChecklistForm);
-            setActionMsg('Poin checklist berhasil diperbarui!');
+            toast.success('Poin checklist berhasil diperbarui!');
             setEditingChecklist(null);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal memperbarui poin checklist.');
+            toast.error(err.response?.data?.message || 'Gagal memperbarui poin checklist.');
         }
     };
 
@@ -306,11 +297,10 @@ export default function Admin({ user: currentUser }) {
                 ...item,
                 is_active: newStatus,
             });
-            setActionMsg(`Poin checklist "${item.label}" sekarang ${newStatus ? 'Aktif' : 'Nonaktif'}.`);
+            toast.success(`Poin checklist "${item.label}" sekarang ${newStatus ? 'Aktif' : 'Nonaktif'}.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal mengubah status checklist.');
+            toast.error(err.response?.data?.message || 'Gagal mengubah status checklist.');
         }
     };
 
@@ -319,11 +309,10 @@ export default function Admin({ user: currentUser }) {
         if (!confirm(`Konfirmasi hapus poin checklist "${item.label}"?`)) return;
         try {
             await api.delete(`/checklist-items/${item.id}`);
-            setActionMsg(`Poin checklist "${item.label}" berhasil dihapus.`);
+            toast.success(`Poin checklist "${item.label}" berhasil dihapus.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menghapus poin checklist.');
+            toast.error(err.response?.data?.message || 'Gagal menghapus poin checklist.');
         }
     };
 
@@ -333,22 +322,21 @@ export default function Admin({ user: currentUser }) {
         try {
             await api.post(`/assets/${assetId}/reset-token`);
             refreshData();
-            alert(`QR Token untuk ${assetCode} berhasil diperbarui.`);
+            toast.success(`QR Token untuk ${assetCode} berhasil diperbarui.`);
         } catch (err) {
-            alert('Gagal mereset token.');
+            toast.error('Gagal mereset token.');
         }
     };
 
     // Archive / Decommission Asset (Soft Delete)
     const handleDeactivateAsset = async (targetAsset) => {
-        if (!confirm(`Konfirmasi nonaktifkan (afkir) alat "${targetAsset.code}" (${targetAsset.asset_type?.name || 'Alat'})?\n\nAlat tidak akan muncul di dashboard dan jadwal patroli, namun seluruh riwayat inspeksi masa lalu tetap tersimpan utuh untuk bukti audit K3.`)) return;
+        if (!confirm(`Konfirmasi nonaktifkan (afkir) alat "${targetAsset.code}" (${targetAsset.asset_type?.name || 'Alat'})?\n\nAlat tidak akan muncul di dashboard dan jadwal patroli, namun seluruh riwayat inspeksi masa lalu tetap tersimpan utuh untuk bukti audit.`)) return;
         try {
             await api.delete(`/assets/${targetAsset.id}`);
-            setActionMsg(`Alat keselamatan "${targetAsset.code}" berhasil dinonaktifkan (diarsipkan).`);
+            toast.success(`Alat keselamatan "${targetAsset.code}" berhasil dinonaktifkan (diarsipkan).`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menonaktifkan alat keselamatan.');
+            toast.error(err.response?.data?.message || 'Gagal menonaktifkan alat keselamatan.');
         }
     };
 
@@ -357,11 +345,10 @@ export default function Admin({ user: currentUser }) {
         if (!confirm(`Aktifkan kembali alat keselamatan "${targetAsset.code}" ke daftar operasional aktif?`)) return;
         try {
             await api.post(`/assets/${targetAsset.id}/restore`);
-            setActionMsg(`Alat keselamatan "${targetAsset.code}" berhasil diaktifkan kembali.`);
+            toast.success(`Alat keselamatan "${targetAsset.code}" berhasil diaktifkan kembali.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal mengaktifkan kembali alat.');
+            toast.error(err.response?.data?.message || 'Gagal mengaktifkan kembali alat.');
         }
     };
 
@@ -369,17 +356,16 @@ export default function Admin({ user: currentUser }) {
     const handleDeleteArea = async (targetArea) => {
         const areaAssetsCount = assets.filter((asset) => asset.area_id === targetArea.id).length;
         if (areaAssetsCount > 0) {
-            alert(`Area "${targetArea.name}" tidak dapat dihapus karena masih digunakan oleh ${areaAssetsCount} alat keselamatan. Pindahkan atau hapus alat tersebut terlebih dahulu.`);
+            toast.warning(`Area "${targetArea.name}" tidak dapat dihapus karena masih digunakan oleh ${areaAssetsCount} alat keselamatan.`);
             return;
         }
         if (!confirm(`Konfirmasi hapus area penempatan "${targetArea.name}"?`)) return;
         try {
             await api.delete(`/areas/${targetArea.id}`);
-            setActionMsg(`Area "${targetArea.name}" berhasil dihapus.`);
+            toast.success(`Area "${targetArea.name}" berhasil dihapus.`);
             refreshData();
-            setTimeout(() => setActionMsg(''), 3000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menghapus area.');
+            toast.error(err.response?.data?.message || 'Gagal menghapus area.');
         }
     };
 
@@ -422,9 +408,9 @@ export default function Admin({ user: currentUser }) {
             {/* Admin Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200">
                 <div>
-                    <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Administrasi Sistem K3</h1>
+                    <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Administrasi Sistem</h1>
                     <p className="text-xs sm:text-sm text-slate-600">
-                        Kelola checklist K3, akun petugas, inventaris alat keselamatan, dan master area
+                        Kelola checklist, akun petugas, inventaris alat keselamatan, dan master area
                     </p>
                 </div>
 
@@ -469,16 +455,9 @@ export default function Admin({ user: currentUser }) {
                 </div>
             </div>
 
-            {/* Feedback notification */}
-            {actionMsg && (
-                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm flex items-center gap-2">
-                    <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>{actionMsg}</span>
-                </div>
-            )}
-
             {/* Navigation Tabs */}
             <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto">
+                {/* 1. Daftar Alat */}
                 <button
                     onClick={() => setTab('assets')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
@@ -490,6 +469,21 @@ export default function Admin({ user: currentUser }) {
                     <LuShieldCheck className="w-4 h-4" />
                     <span>Daftar Alat ({assets.length})</span>
                 </button>
+
+                {/* 2. Area & Jenis Alat */}
+                <button
+                    onClick={() => setTab('masters')}
+                    className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
+                        activeTab === 'masters'
+                            ? 'border-blue-600 text-blue-600'
+                            : 'border-transparent text-slate-600 hover:text-slate-900'
+                    }`}
+                >
+                    <LuLayers className="w-4 h-4" />
+                    <span>Area & Jenis Alat</span>
+                </button>
+
+                {/* 3. Poin Checklist */}
                 <button
                     onClick={() => setTab('checklists')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
@@ -501,6 +495,8 @@ export default function Admin({ user: currentUser }) {
                     <LuClipboardCheck className="w-4 h-4" />
                     <span>Poin Checklist ({checklists.length})</span>
                 </button>
+
+                {/* 4. Manajemen Petugas */}
                 <button
                     onClick={() => setTab('users')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
@@ -511,17 +507,6 @@ export default function Admin({ user: currentUser }) {
                 >
                     <LuUsers className="w-4 h-4" />
                     <span>Manajemen Petugas ({users.length})</span>
-                </button>
-                <button
-                    onClick={() => setTab('masters')}
-                    className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
-                        activeTab === 'masters'
-                            ? 'border-blue-600 text-blue-600'
-                            : 'border-transparent text-slate-600 hover:text-slate-900'
-                    }`}
-                >
-                    <LuLayers className="w-4 h-4" />
-                    <span>Area & Jenis Alat</span>
                 </button>
             </div>
 
@@ -604,32 +589,34 @@ export default function Admin({ user: currentUser }) {
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-wrap items-center gap-2 pt-2 md:pt-0">
+                                        <div className="flex items-center justify-between md:justify-end gap-2 pt-2.5 md:pt-0 border-t border-slate-100 md:border-t-0">
                                             {asset.is_active ? (
                                                 <>
                                                     <StatusBadge status={asset.status} size="sm" />
-                                                    <a
-                                                        href={`/api/assets/${asset.id}/label`}
-                                                        download
-                                                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition"
-                                                    >
-                                                        <LuDownload className="w-3.5 h-3.5" />
-                                                        <span>Unduh QR</span>
-                                                    </a>
-                                                    <button
-                                                        onClick={() => handleResetToken(asset.id, asset.code)}
-                                                        title="Reset QR Token jika stiker hilang/rusak"
-                                                        className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
-                                                    >
-                                                        <LuRefreshCw className="w-3.5 h-3.5" />
-                                                    </button>
-                                                    <button
-                                                        onClick={() => handleDeactivateAsset(asset)}
-                                                        title="Nonaktifkan / Afkir Alat (Riwayat audit tetap aman)"
-                                                        className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-amber-700 hover:bg-amber-50 transition cursor-pointer"
-                                                    >
-                                                        <LuArchive className="w-3.5 h-3.5" />
-                                                    </button>
+                                                    <div className="flex items-center gap-1.5 ml-auto">
+                                                        <a
+                                                            href={`/api/assets/${asset.id}/label`}
+                                                            download
+                                                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition"
+                                                        >
+                                                            <LuDownload className="w-3.5 h-3.5" />
+                                                            <span>Unduh QR</span>
+                                                        </a>
+                                                        <button
+                                                            onClick={() => handleResetToken(asset.id, asset.code)}
+                                                            title="Reset QR Token"
+                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                                                        >
+                                                            <LuRefreshCw className="w-3.5 h-3.5" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeactivateAsset(asset)}
+                                                            title="Nonaktifkan/Arsipkan"
+                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-amber-700 hover:bg-amber-50 transition cursor-pointer"
+                                                        >
+                                                            <LuArchive className="w-3.5 h-3.5" />
+                                                        </button>
+                                                    </div>
                                                 </>
                                             ) : (
                                                 <>
@@ -640,7 +627,7 @@ export default function Admin({ user: currentUser }) {
                                                     <button
                                                         onClick={() => handleRestoreAsset(asset)}
                                                         title="Aktifkan kembali alat keselamatan"
-                                                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 text-xs font-semibold transition cursor-pointer"
+                                                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 text-xs font-semibold transition cursor-pointer ml-auto"
                                                     >
                                                         <LuRotateCcw className="w-3.5 h-3.5" />
                                                         <span>Aktifkan Kembali</span>
@@ -656,7 +643,7 @@ export default function Admin({ user: currentUser }) {
                 </div>
             )}
 
-            {/* TAB 2: MANAJEMEN POIN CHECKLIST K3 (PILIH JENIS ALAT -> DAFTAR CHECKLIST -> CRUD) */}
+            {/* TAB 2: MANAJEMEN POIN CHECKLIST (PILIH JENIS ALAT -> DAFTAR CHECKLIST -> CRUD) */}
             {activeTab === 'checklists' && (
                 <div className="space-y-5">
                     {!selectedAssetType ? (
@@ -1241,7 +1228,7 @@ export default function Admin({ user: currentUser }) {
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
                                     <LuClipboardCheck className="w-5 h-5 text-blue-600" />
-                                    <span>Tambah Poin Checklist K3</span>
+                                    <span>Tambah Poin Checklist</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Pertanyaan pemeriksaan terikat dengan jenis alat</p>
                             </div>
@@ -1359,7 +1346,7 @@ export default function Admin({ user: currentUser }) {
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
                                     <LuPencil className="w-5 h-5 text-blue-600" />
-                                    <span>Ubah Poin Checklist K3</span>
+                                    <span>Ubah Poin Checklist</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Edit pertanyaan atau ubah standar kondisi OK</p>
                             </div>
@@ -1531,8 +1518,8 @@ export default function Admin({ user: currentUser }) {
                                     onChange={(e) => setUserForm({ ...userForm, role: e.target.value })}
                                     className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
                                 >
-                                    <option value="officer">Petugas Lapangan (Inspeksi & Riwayat)</option>
-                                    <option value="admin">Administrator (Akses Penuh & Master Data)</option>
+                                    <option value="officer">Petugas Lapangan</option>
+                                    <option value="admin">Administrator</option>
                                 </select>
                             </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../api/client';
+import { useToast } from '../context/ToastContext';
 import {
     LuShieldCheck,
     LuEye,
@@ -11,25 +12,25 @@ import {
 } from 'react-icons/lu';
 
 export default function Login({ onLoginSuccess }) {
+    const toast = useToast();
     const navigate = useNavigate();
     const location = useLocation();
     const [form, setForm] = useState({ login: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
 
     const redirect = new URLSearchParams(location.search).get('redirect') || '/dashboard';
 
     const submit = async (e) => {
         e.preventDefault();
-        setError('');
         setLoading(true);
         try {
             const { data } = await api.post('/login', form);
+            toast.success(`Selamat datang kembali, ${data.user.name}!`);
             if (onLoginSuccess) onLoginSuccess(data.user);
             navigate(redirect);
         } catch (err) {
-            setError(err.response?.data?.message || 'Login gagal. Periksa kembali email dan kata sandi Anda.');
+            toast.error(err.response?.data?.message || 'Login gagal. Periksa kembali email dan kata sandi Anda.');
         } finally {
             setLoading(false);
         }
@@ -47,15 +48,8 @@ export default function Login({ onLoginSuccess }) {
                         <LuShieldCheck className="w-6 h-6" />
                     </div>
                     <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Masuk FEMS</h1>
-                    <p className="text-xs sm:text-sm text-slate-600">Facilities & Equipment Monitoring System — PT Yahata</p>
+                    <p className="text-xs sm:text-sm text-slate-600">Facilities & Equipment Monitoring System<br />PT. Yahata Fastener Indonesia</p>
                 </div>
-
-                {error && (
-                    <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-start gap-2.5">
-                        <LuCircleAlert className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
-                        <div>{error}</div>
-                    </div>
-                )}
 
                 <form onSubmit={submit} className="space-y-4">
                     <div>

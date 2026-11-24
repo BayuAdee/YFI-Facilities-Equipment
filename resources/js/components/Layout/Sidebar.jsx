@@ -32,9 +32,9 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
 
     const adminLinks = [
         { path: '/admin?tab=assets', label: 'Daftar Alat & QR', icon: LuShieldCheck },
-        { path: '/admin?tab=checklists', label: 'Poin Checklist K3', icon: LuClipboardCheck },
+        { path: '/admin?tab=masters', label: 'Area & Jenis Alat', icon: LuLayers },
+        { path: '/admin?tab=checklists', label: 'Poin Checklist', icon: LuClipboardCheck },
         { path: '/admin?tab=users', label: 'Manajemen Petugas', icon: LuUsers },
-        { path: '/admin?tab=masters', label: 'Master Area', icon: LuLayers },
     ];
 
     return (
@@ -100,11 +100,11 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                     </nav>
                 </div>
 
-                {/* Administrasi K3 Section */}
+                {/* Administrasi Section */}
                 {isAdmin && (
                     <div>
                         <span className="px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block mb-1.5">
-                            Administrasi K3
+                            Administrasi
                         </span>
                         <nav className="space-y-1">
                             {adminLinks.map((item) => {
@@ -143,7 +143,7 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                             <div className="min-w-0">
                                 <p className="text-xs font-bold text-slate-900 truncate leading-tight">{user.name}</p>
                                 <p className="text-[10px] text-slate-500 capitalize truncate">
-                                    {isAdmin ? 'Administrator' : 'Petugas K3'}
+                                    {isAdmin ? 'Administrator' : 'Petugas'}
                                 </p>
                             </div>
                         </div>

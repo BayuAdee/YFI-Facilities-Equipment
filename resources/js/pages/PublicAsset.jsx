@@ -5,6 +5,7 @@ import api from '../api/client';
 import { formatDate } from '../utils/date';
 import StatusBadge from '../components/UI/StatusBadge';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import { useToast } from '../context/ToastContext';
 import {
     LuClipboardCheck,
     LuClock,
@@ -19,6 +20,7 @@ import {
 } from 'react-icons/lu';
 
 export default function PublicAsset({ user }) {
+    const toast = useToast();
     const { token } = useParams();
     const [data, setData] = useState(null);
     const [history, setHistory] = useState(null);
@@ -40,6 +42,7 @@ export default function PublicAsset({ user }) {
     const copyLink = () => {
         navigator.clipboard.writeText(window.location.href);
         setCopied(true);
+        toast.success('Tautan alat berhasil disalin ke clipboard!');
         setTimeout(() => setCopied(false), 2000);
     };
 

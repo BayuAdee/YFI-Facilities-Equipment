@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LuShieldCheck, LuLogOut, LuLogIn } from 'react-icons/lu';
+import { LuShieldCheck } from 'react-icons/lu';
 
-export default function MobileHeader({ user, onLogout }) {
+export default function MobileHeader({ user }) {
     return (
         <header className="md:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
             <div className="px-4 h-14 flex items-center justify-between">
@@ -19,22 +19,12 @@ export default function MobileHeader({ user, onLogout }) {
                     </div>
                 </Link>
 
-                {/* User Info / Logout Button */}
+                {/* User Info (Logout button disembunyikan di header mobile karena sudah ada di Bottom Navigation) */}
                 <div className="flex items-center gap-2">
                     {user ? (
-                        <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-slate-700 max-w-[120px] truncate">
-                                {user.name}
-                            </span>
-                            <button
-                                type="button"
-                                onClick={onLogout}
-                                title="Keluar"
-                                className="p-1.5 text-slate-500 hover:text-rose-600 rounded-lg hover:bg-slate-100 transition cursor-pointer"
-                            >
-                                <LuLogOut className="w-4 h-4" />
-                            </button>
-                        </div>
+                        <span className="text-xs font-bold text-slate-700 max-w-[140px] truncate bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200/60">
+                            {user.name}
+                        </span>
                     ) : (
                         <Link
                             to="/login"

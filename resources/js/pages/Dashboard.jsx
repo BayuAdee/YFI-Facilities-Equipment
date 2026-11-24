@@ -4,6 +4,7 @@ import api from '../api/client';
 import { formatDate } from '../utils/date';
 import StatusBadge from '../components/UI/StatusBadge';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import { useToast } from '../context/ToastContext';
 import {
     LuCircleCheck,
     LuTriangleAlert,
@@ -17,6 +18,7 @@ import {
 } from 'react-icons/lu';
 
 export default function Dashboard({ user }) {
+    const toast = useToast();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeFilter, setActiveFilter] = useState('ALL');
@@ -24,7 +26,6 @@ export default function Dashboard({ user }) {
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [repairNotes, setRepairNotes] = useState('');
     const [resolving, setResolving] = useState(false);
-    const [actionMsg, setActionMsg] = useState('');
 
     const refreshDashboard = () => {
         api.get('/dashboard')
@@ -52,13 +53,12 @@ export default function Dashboard({ user }) {
             const res = await api.post(`/assets/${selectedAsset.id}/resolve`, {
                 notes: repairNotes,
             });
-            setActionMsg(res.data.message || `Alat ${selectedAsset.code} berhasil diperbaiki dan kembali OK.`);
+            toast.success(res.data.message || `Alat ${selectedAsset.code} berhasil diperbaiki dan kembali OK.`);
             setSelectedAsset(null);
             setRepairNotes('');
             refreshDashboard();
-            setTimeout(() => setActionMsg(''), 4000);
         } catch (err) {
-            alert(err.response?.data?.message || 'Gagal menandai alat selesai diperbaiki.');
+            toast.error(err.response?.data?.message || 'Gagal menandai alat selesai diperbaiki.');
         } finally {
             setResolving(false);
         }
@@ -90,37 +90,37 @@ export default function Dashboard({ user }) {
             title: 'Daftar Seluruh Alat Keselamatan',
             icon: LuShieldCheck,
             iconBg: 'bg-blue-50 text-blue-600',
-            emptyText: 'Belum ada data alat keselamatan terdaftar.',
+            emptyText: 'Belum ada data alat.',
         },
         OK: {
             title: 'Daftar Alat Kondisi OK / Normal',
             icon: LuCircleCheck,
             iconBg: 'bg-emerald-50 text-emerald-600',
-            emptyText: 'Tidak ada alat keselamatan dengan status Kondisi OK.',
+            emptyText: 'Tidak ada alat berstatus OK.',
         },
         'Perlu Tindak Lanjut': {
             title: 'Daftar Alat Perlu Perbaikan',
             icon: LuTriangleAlert,
             iconBg: 'bg-amber-50 text-amber-600',
-            emptyText: 'Hebat! Tidak ada alat yang memerlukan perbaikan saat ini.',
+            emptyText: 'Tidak ada alat yang perlu perbaikan.',
         },
         Overdue: {
             title: 'Daftar Alat Terlambat Inspeksi',
             icon: LuClock,
             iconBg: 'bg-orange-50 text-orange-600',
-            emptyText: 'Bagus! Semua alat diperiksa tepat waktu, tidak ada yang terlambat.',
+            emptyText: 'Tidak ada alat yang terlambat diperiksa.',
         },
         Expired: {
             title: 'Daftar Alat Kedaluwarsa',
             icon: LuCircleAlert,
             iconBg: 'bg-rose-50 text-rose-600',
-            emptyText: 'Aman! Tidak ada alat keselamatan yang kedaluwarsa.',
+            emptyText: 'Tidak ada alat yang kedaluwarsa.',
         },
     }[activeFilter] || {
         title: 'Daftar Alat Keselamatan',
         icon: LuShieldCheck,
         iconBg: 'bg-slate-100 text-slate-600',
-        emptyText: 'Tidak ada alat ditemukan.',
+        emptyText: 'Tidak ada data alat.',
     };
 
     const FilterIcon = filterInfo.icon;
@@ -131,9 +131,6 @@ export default function Dashboard({ user }) {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-200">
                 <div>
                     <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Facilities & Equipment Monitoring System</h1>
-                    <p className="text-xs sm:text-sm text-slate-600">
-                        Monitoring berkala APAR, Hydrant & Fasilitas Kerja PT Yahata
-                    </p>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/60">
@@ -146,14 +143,6 @@ export default function Dashboard({ user }) {
                     </span>
                 </div>
             </div>
-
-            {/* Feedback notification */}
-            {actionMsg && (
-                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm flex items-center gap-2">
-                    <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>{actionMsg}</span>
-                </div>
-            )}
 
             {/* Stat Cards 4 Columns */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -171,7 +160,6 @@ export default function Dashboard({ user }) {
                         </div>
                     </div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">{counts['OK'] || 0}</div>
-                    <span className="text-[11px] text-emerald-700 font-medium mt-1 block">Siap digunakan</span>
                 </div>
 
                 {/* Perlu Tindak Lanjut */}
@@ -188,7 +176,6 @@ export default function Dashboard({ user }) {
                         </div>
                     </div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">{counts['Perlu Tindak Lanjut'] || 0}</div>
-                    <span className="text-[11px] text-amber-700 font-medium mt-1 block">Temuan inspeksi</span>
                 </div>
 
                 {/* Overdue */}
@@ -205,7 +192,6 @@ export default function Dashboard({ user }) {
                         </div>
                     </div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">{counts['Overdue'] || 0}</div>
-                    <span className="text-[11px] text-orange-700 font-medium mt-1 block">Lewat jadwal cek</span>
                 </div>
 
                 {/* Expired */}
@@ -222,7 +208,6 @@ export default function Dashboard({ user }) {
                         </div>
                     </div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">{counts['Expired'] || 0}</div>
-                    <span className="text-[11px] text-rose-700 font-medium mt-1 block">Perlu isi ulang/ganti</span>
                 </div>
             </div>
 
@@ -272,14 +257,14 @@ export default function Dashboard({ user }) {
                 {filteredAssets.length === 0 ? (
                     <div className="text-center py-10 border border-dashed border-slate-200 rounded-xl px-4">
                         <FilterIcon className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-                        <p className="text-sm font-bold text-slate-900">
+                        <p className="text-sm font-semibold text-slate-600">
                             {searchQuery ? 'Tidak ada alat yang cocok dengan pencarian' : filterInfo.emptyText}
                         </p>
-                        <p className="text-xs text-slate-500 mt-1">
-                            {searchQuery
-                                ? `Hasil pencarian untuk "${searchQuery}" tidak ditemukan.`
-                                : 'Gunakan filter lain di atas atau daftarkan alat baru di menu Admin.'}
-                        </p>
+                        {searchQuery && (
+                            <p className="text-xs text-slate-400 mt-1">
+                                Coba kata kunci lain atau periksa ejaan.
+                            </p>
+                        )}
                         {(activeFilter !== 'ALL' || searchQuery) && (
                             <button
                                 onClick={() => {

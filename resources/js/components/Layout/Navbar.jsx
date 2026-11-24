@@ -19,9 +19,9 @@ export default function Navbar({ user, onLogout }) {
     const navItems = [
         { path: '/dashboard', label: 'Dashboard', icon: LuLayoutDashboard },
         { path: '/admin?tab=assets', label: 'Alat & QR', icon: LuShieldCheck, adminOnly: true },
-        { path: '/admin?tab=checklists', label: 'Checklist K3', icon: LuClipboardCheck, adminOnly: true },
-        { path: '/admin?tab=users', label: 'Petugas K3', icon: LuUsers, adminOnly: true },
-        { path: '/admin?tab=masters', label: 'Master Area', icon: LuLayers, adminOnly: true },
+        { path: '/admin?tab=masters', label: 'Area & Jenis Alat', icon: LuLayers, adminOnly: true },
+        { path: '/admin?tab=checklists', label: 'Checklist', icon: LuClipboardCheck, adminOnly: true },
+        { path: '/admin?tab=users', label: 'Petugas', icon: LuUsers, adminOnly: true },
     ];
 
     const isActive = (path) => {

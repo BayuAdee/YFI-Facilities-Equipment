@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api/client';
 import StatusBadge from '../components/UI/StatusBadge';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import { useToast } from '../context/ToastContext';
 import {
     LuArrowLeft,
     LuMapPin,
@@ -17,6 +18,7 @@ import {
 } from 'react-icons/lu';
 
 export default function Inspection({ user }) {
+    const toast = useToast();
     const { token } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState(null);
@@ -26,8 +28,6 @@ export default function Inspection({ user }) {
     const [photoPreviews, setPhotoPreviews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         setLoading(true);
@@ -90,11 +90,9 @@ export default function Inspection({ user }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        setErrorMessage('');
-        setSuccessMessage('');
 
         if (hasIssues && !notes.trim()) {
-            setErrorMessage('Catatan wajib diisi jika terdapat indikator checklist yang tidak sesuai.');
+            toast.warning('Catatan wajib diisi jika terdapat indikator checklist yang tidak sesuai.');
             return;
         }
 
@@ -117,12 +115,12 @@ export default function Inspection({ user }) {
             const res = await api.post('/inspections', payload, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            setSuccessMessage(`Inspeksi berhasil disimpan! Status terbaru alat: ${res.data.status}`);
+            toast.success(`Inspeksi berhasil disimpan! Status terbaru alat: ${res.data.status}`);
             setTimeout(() => {
                 navigate(`/a/${token}`);
             }, 1800);
         } catch (err) {
-            setErrorMessage(err.response?.data?.message || 'Gagal menyimpan hasil inspeksi. Silakan periksa kembali.');
+            toast.error(err.response?.data?.message || 'Gagal menyimpan hasil inspeksi. Silakan periksa kembali.');
         } finally {
             setSubmitting(false);
         }
@@ -180,20 +178,6 @@ export default function Inspection({ user }) {
                 </div>
                 <StatusBadge status={data.asset.status} size="sm" />
             </div>
-
-            {/* Feedback Alerts */}
-            {errorMessage && (
-                <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-start gap-3">
-                    <LuCircleAlert className="w-5 h-5 shrink-0 mt-0.5 text-rose-600" />
-                    <div>{errorMessage}</div>
-                </div>
-            )}
-            {successMessage && (
-                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-start gap-3">
-                    <LuCircleCheck className="w-5 h-5 shrink-0 mt-0.5 text-emerald-600" />
-                    <div>{successMessage}</div>
-                </div>
-            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Checklist Section */}
