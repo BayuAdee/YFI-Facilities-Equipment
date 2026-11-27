@@ -142,7 +142,7 @@ export default function QrScannerModal({ isOpen, onClose, user }) {
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-slate-800 text-white flex items-center justify-center shadow-xs">
                             <LuScanQrCode className="w-4 h-4" />
                         </div>
                         <div>
@@ -168,7 +168,7 @@ export default function QrScannerModal({ isOpen, onClose, user }) {
                     {/* Loading State */}
                     {isStarting && (
                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/90 text-white p-4 text-center z-10">
-                            <LuLoaderCircle className="w-8 h-8 animate-spin text-blue-500 mb-2" />
+                            <LuLoaderCircle className="w-8 h-8 animate-spin text-slate-400 mb-2" />
                             <p className="text-xs font-semibold">Mengaktifkan kamera...</p>
                         </div>
                     )}
@@ -196,7 +196,7 @@ export default function QrScannerModal({ isOpen, onClose, user }) {
                             placeholder="Ketik token atau URL..."
                             value={manualCode}
                             onChange={(e) => setManualCode(e.target.value)}
-                            className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                            className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                         />
                         <button
                             type="submit"

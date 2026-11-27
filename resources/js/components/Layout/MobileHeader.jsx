@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LuShieldCheck } from 'react-icons/lu';
 
 export default function MobileHeader({ user }) {
     return (
@@ -8,12 +7,14 @@ export default function MobileHeader({ user }) {
             <div className="px-4 h-14 flex items-center justify-between">
                 {/* Brand Logo */}
                 <Link to="/dashboard" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-2xs shrink-0">
-                        <LuShieldCheck className="w-4 h-4" />
-                    </div>
+                    <img
+                        src="/logo.jpg"
+                        alt="Logo FEMS Yahata"
+                        className="w-8 h-8 rounded-lg object-contain bg-white border border-slate-200/80 shadow-2xs p-0.5 shrink-0"
+                    />
                     <div className="flex items-center gap-1.5">
                         <span className="font-extrabold text-base tracking-tight text-slate-900">FEMS</span>
-                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-50 text-blue-700 border border-blue-200/60 uppercase">
+                        <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-800 border border-slate-300 uppercase">
                             Yahata
                         </span>
                     </div>
@@ -28,7 +29,7 @@ export default function MobileHeader({ user }) {
                     ) : (
                         <Link
                             to="/login"
-                            className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold"
+                            className="px-3 py-1.5 rounded-lg bg-slate-800 text-white text-xs font-semibold"
                         >
                             Masuk
                         </Link>

@@ -83,7 +83,7 @@ export function ToastProvider({ children, hasSidebar = false }) {
                                 {isError && <LuCircleAlert className="w-5 h-5 text-rose-600" />}
                                 {isWarning && <LuTriangleAlert className="w-5 h-5 text-amber-500" />}
                                 {isSuccess && <LuCircleCheck className="w-5 h-5 text-emerald-600" />}
-                                {t.type === 'info' && <LuInfo className="w-5 h-5 text-blue-600" />}
+                                {t.type === 'info' && <LuInfo className="w-5 h-5 text-slate-700" />}
                             </div>
 
                             <div className="flex-1 text-sm text-slate-700 leading-snug">

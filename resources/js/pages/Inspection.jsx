@@ -140,7 +140,7 @@ export default function Inspection({ user }) {
                 <p className="text-sm text-slate-600 mb-4">{errorMessage || 'Silakan masuk terlebih dahulu sebagai petugas.'}</p>
                 <Link
                     to={`/login?redirect=/inspeksi/${token}`}
-                    className="inline-flex items-center px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold"
+                    className="inline-flex items-center px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold transition"
                 >
                     Masuk Sekarang
                 </Link>
@@ -167,7 +167,7 @@ export default function Inspection({ user }) {
             {/* Asset Brief Card */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 flex items-center justify-between">
                 <div>
-                    <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                         {data.asset.asset_type?.name || 'APAR'}
                     </span>
                     <h1 className="text-xl font-extrabold text-slate-900 mt-1">{data.asset.code}</h1>
@@ -184,7 +184,7 @@ export default function Inspection({ user }) {
                 <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 sm:p-6 space-y-4">
                     <div className="border-b border-slate-100 pb-3">
                         <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <LuClipboardCheck className="w-5 h-5 text-blue-600" />
+                            <LuClipboardCheck className="w-5 h-5 text-slate-700" />
                             <span>Checklist Fisik & Kondisi</span>
                         </h2>
                         <p className="text-xs text-slate-600 mt-0.5">
@@ -249,7 +249,7 @@ export default function Inspection({ user }) {
                                             value={answers[item.id] ?? ''}
                                             onChange={(e) => setAnswers({ ...answers, [item.id]: e.target.value })}
                                             placeholder="Ketik nilai pengamatan..."
-                                            className="w-full px-3.5 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                            className="w-full px-3.5 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                         />
                                     )}
                                 </div>
@@ -263,7 +263,7 @@ export default function Inspection({ user }) {
                     <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div>
                             <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                                <LuCamera className="w-5 h-5 text-blue-600" />
+                                <LuCamera className="w-5 h-5 text-slate-700" />
                                 <span>Foto Bukti Inspeksi</span>
                             </h2>
                             <p className="text-xs text-slate-600 mt-0.5">Ambil foto manometer, pin, atau kondisi fisik (maks. 5 foto)</p>
@@ -290,7 +290,7 @@ export default function Inspection({ user }) {
                     )}
 
                     {photos.length < 5 && (
-                        <label className="border-2 border-dashed border-slate-200 hover:border-blue-400 rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer transition bg-slate-50/50 hover:bg-blue-50/20">
+                        <label className="border-2 border-dashed border-slate-200 hover:border-slate-400 rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer transition bg-slate-50/50 hover:bg-slate-100/60">
                             <LuCamera className="w-7 h-7 text-slate-600 mb-2" />
                             <span className="text-xs font-bold text-slate-700">Sentuh untuk Ambil / Pilih Foto</span>
                             <span className="text-[11px] text-slate-600 mt-0.5">JPG, PNG, atau WEBP</span>
@@ -325,7 +325,7 @@ export default function Inspection({ user }) {
                                 ? 'Jelaskan temuan ketidaksesuaian secara rinci (wajib)...'
                                 : 'Tuliskan catatan tambahan kondisi alat (opsional)...'
                         }
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                     />
                 </div>
 
@@ -334,7 +334,7 @@ export default function Inspection({ user }) {
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-blue-600 text-white font-bold text-base hover:bg-blue-700 transition shadow-sm shadow-blue-500/25 disabled:opacity-50"
+                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-slate-800 text-white font-bold text-base hover:bg-slate-900 transition shadow-xs disabled:opacity-50 cursor-pointer"
                     >
                         {submitting ? (
                             <>

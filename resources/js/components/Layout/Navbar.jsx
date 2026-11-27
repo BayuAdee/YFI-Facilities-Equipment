@@ -39,13 +39,15 @@ export default function Navbar({ user, onLogout }) {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 {/* Brand Logo */}
                 <Link to="/dashboard" className="flex items-center gap-2.5 group">
-                    <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shadow-blue-500/20 group-hover:bg-blue-700 transition">
-                        <LuShieldCheck className="w-5 h-5" />
-                    </div>
+                    <img
+                        src="/logo.jpg"
+                        alt="Logo FEMS Yahata"
+                        className="w-9 h-9 rounded-xl object-contain bg-white border border-slate-200/80 shadow-2xs p-0.5 shrink-0"
+                    />
                     <div className="flex flex-col">
                         <div className="flex items-center gap-1.5">
                             <span className="font-extrabold text-lg tracking-tight text-slate-900">FEMS</span>
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200/60 uppercase tracking-wide">
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300 uppercase tracking-wide">
                                 Yahata
                             </span>
                         </div>
@@ -66,7 +68,7 @@ export default function Navbar({ user, onLogout }) {
                                     to={item.path}
                                     className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium transition ${
                                         active
-                                            ? 'bg-blue-50 text-blue-700'
+                                            ? 'bg-slate-100 text-slate-900 font-bold'
                                             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                                     }`}
                                 >
@@ -118,7 +120,7 @@ export default function Navbar({ user, onLogout }) {
                     ) : location.pathname !== '/login' ? (
                         <Link
                             to="/login"
-                            className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold"
+                            className="px-3 py-1.5 rounded-lg bg-slate-800 text-white text-xs font-semibold hover:bg-slate-900 transition"
                         >
                             Masuk
                         </Link>
@@ -156,7 +158,7 @@ export default function Navbar({ user, onLogout }) {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-semibold transition ${
                                         active
-                                            ? 'bg-blue-50 text-blue-700'
+                                            ? 'bg-slate-100 text-slate-900 font-bold'
                                             : 'text-slate-700 hover:bg-slate-50'
                                     }`}
                                 >

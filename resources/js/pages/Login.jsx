@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../api/client';
 import { useToast } from '../context/ToastContext';
 import {
-    LuShieldCheck,
     LuEye,
     LuEyeOff,
     LuLogIn,
@@ -44,8 +43,12 @@ export default function Login({ onLoginSuccess }) {
         <div className="max-w-md mx-auto py-8 sm:py-14 px-4">
             <div className="bg-white rounded-3xl border border-slate-200/80 shadow-md p-6 sm:p-8 space-y-6">
                 <div className="text-center space-y-1">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center mx-auto mb-3 shadow-md shadow-blue-500/25">
-                        <LuShieldCheck className="w-6 h-6" />
+                    <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center mx-auto mb-3 p-1.5 overflow-hidden">
+                        <img
+                            src="/logo.jpg"
+                            alt="Logo FEMS Yahata"
+                            className="w-full h-full object-contain"
+                        />
                     </div>
                     <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Masuk FEMS</h1>
                     <p className="text-xs sm:text-sm text-slate-600">Facilities & Equipment Monitoring System<br />PT. Yahata Fastener Indonesia</p>
@@ -61,7 +64,7 @@ export default function Login({ onLoginSuccess }) {
                                 value={form.login}
                                 onChange={(e) => setForm({ ...form, login: e.target.value })}
                                 placeholder="nama@perusahaan.com"
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                         </div>
                     </div>
@@ -75,7 +78,7 @@ export default function Login({ onLoginSuccess }) {
                                 value={form.password}
                                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                                 placeholder="••••••••"
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 pr-10"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 pr-10"
                             />
                             <button
                                 type="button"
@@ -90,7 +93,7 @@ export default function Login({ onLoginSuccess }) {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition shadow-sm shadow-blue-500/25 disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="w-full py-3.5 rounded-xl bg-slate-800 text-white font-bold text-sm hover:bg-slate-900 transition shadow-xs disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                     >
                         {loading ? <LuLoaderCircle className="w-4 h-4 animate-spin" /> : <LuLogIn className="w-4 h-4" />}
                         <span>Masuk ke Akun</span>

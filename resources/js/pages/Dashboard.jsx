@@ -89,7 +89,7 @@ export default function Dashboard({ user }) {
         ALL: {
             title: 'Daftar Seluruh Alat Keselamatan',
             icon: LuShieldCheck,
-            iconBg: 'bg-blue-50 text-blue-600',
+            iconBg: 'bg-slate-100 text-slate-700',
             emptyText: 'Belum ada data alat.',
         },
         OK: {
@@ -237,7 +237,7 @@ export default function Dashboard({ user }) {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Cari kode alat, jenis, area..."
-                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                         </div>
                         {activeFilter !== 'ALL' && (
@@ -290,7 +290,7 @@ export default function Dashboard({ user }) {
                                 >
                                     <div className="space-y-1">
                                         <div className="flex items-center gap-2">
-                                            <Link to={`/a/${asset.qr_token}`} className="font-bold text-slate-900 hover:text-blue-600 transition">
+                                            <Link to={`/a/${asset.qr_token}`} className="font-bold text-slate-900 hover:text-slate-600 transition">
                                                 {asset.code}
                                             </Link>
                                             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">

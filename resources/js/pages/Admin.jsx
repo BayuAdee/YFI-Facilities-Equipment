@@ -418,7 +418,7 @@ export default function Admin({ user: currentUser }) {
                     {activeTab === 'users' && (
                         <button
                             onClick={() => setShowAddUserModal(true)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition shadow-xs"
                         >
                             <LuUserPlus className="w-4 h-4" />
                             <span>Tambah Petugas</span>
@@ -437,7 +437,7 @@ export default function Admin({ user: currentUser }) {
                                 });
                                 setShowAddChecklistModal(true);
                             }}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition shadow-xs"
                         >
                             <LuPlus className="w-4 h-4" />
                             <span>Tambah Poin Checklist</span>
@@ -446,7 +446,7 @@ export default function Admin({ user: currentUser }) {
                     {activeTab === 'assets' && (
                         <button
                             onClick={() => setShowAddAssetModal(true)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition shadow-xs"
                         >
                             <LuPlus className="w-4 h-4" />
                             <span>Tambah Alat Baru</span>
@@ -462,7 +462,7 @@ export default function Admin({ user: currentUser }) {
                     onClick={() => setTab('assets')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
                         activeTab === 'assets'
-                            ? 'border-blue-600 text-blue-600'
+                            ? 'border-slate-800 text-slate-900'
                             : 'border-transparent text-slate-600 hover:text-slate-900'
                     }`}
                 >
@@ -475,7 +475,7 @@ export default function Admin({ user: currentUser }) {
                     onClick={() => setTab('masters')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
                         activeTab === 'masters'
-                            ? 'border-blue-600 text-blue-600'
+                            ? 'border-slate-800 text-slate-900'
                             : 'border-transparent text-slate-600 hover:text-slate-900'
                     }`}
                 >
@@ -488,7 +488,7 @@ export default function Admin({ user: currentUser }) {
                     onClick={() => setTab('checklists')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
                         activeTab === 'checklists'
-                            ? 'border-blue-600 text-blue-600'
+                            ? 'border-slate-800 text-slate-900'
                             : 'border-transparent text-slate-600 hover:text-slate-900'
                     }`}
                 >
@@ -501,7 +501,7 @@ export default function Admin({ user: currentUser }) {
                     onClick={() => setTab('users')}
                     className={`pb-3 px-3 text-xs sm:text-sm font-bold border-b-2 transition flex items-center gap-1.5 shrink-0 ${
                         activeTab === 'users'
-                            ? 'border-blue-600 text-blue-600'
+                            ? 'border-slate-800 text-slate-900'
                             : 'border-transparent text-slate-600 hover:text-slate-900'
                     }`}
                 >
@@ -522,7 +522,7 @@ export default function Admin({ user: currentUser }) {
                                 value={assetSearch}
                                 onChange={(e) => setAssetSearch(e.target.value)}
                                 placeholder="Cari berdasarkan kode alat, area, atau catatan..."
-                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                         </div>
 
@@ -573,7 +573,7 @@ export default function Admin({ user: currentUser }) {
                                             <div className="flex items-center gap-2">
                                                 <Link
                                                     to={`/a/${asset.qr_token}`}
-                                                    className="font-extrabold text-base text-slate-900 hover:text-blue-600 transition flex items-center gap-1"
+                                                    className="font-extrabold text-base text-slate-900 hover:text-slate-600 transition flex items-center gap-1"
                                                 >
                                                     <span>{asset.code}</span>
                                                     <LuExternalLink className="w-3.5 h-3.5 text-slate-600" />
@@ -605,7 +605,7 @@ export default function Admin({ user: currentUser }) {
                                                         <button
                                                             onClick={() => handleResetToken(asset.id, asset.code)}
                                                             title="Reset QR Token"
-                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition cursor-pointer"
                                                         >
                                                             <LuRefreshCw className="w-3.5 h-3.5" />
                                                         </button>
@@ -649,17 +649,17 @@ export default function Admin({ user: currentUser }) {
                     {!selectedAssetType ? (
                         /* STEP 1: CARD GRID PILIH JENIS ALAT */
                         <div className="space-y-4">
-                            <div className="bg-gradient-to-r from-blue-50 to-indigo-50/60 p-4 sm:p-5 rounded-2xl border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div className="bg-slate-100 p-4 sm:p-5 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
                                     <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                                        <LuLayers className="w-5 h-5 text-blue-600" />
+                                        <LuLayers className="w-5 h-5 text-slate-700" />
                                         <span>Pilih Jenis Alat Keselamatan</span>
                                     </h2>
                                     <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
                                         Klik jenis alat di bawah ini untuk melihat dan mengelola daftar poin checklist pemeriksaan fisiknya.
                                     </p>
                                 </div>
-                                <span className="text-xs font-bold px-3 py-1.5 bg-white text-blue-700 rounded-xl border border-blue-200 shrink-0 self-start sm:self-auto shadow-xs">
+                                <span className="text-xs font-bold px-3 py-1.5 bg-white text-slate-800 rounded-xl border border-slate-300 shrink-0 self-start sm:self-auto shadow-xs">
                                     {types.length} Jenis Alat Terdaftar
                                 </span>
                             </div>
@@ -674,11 +674,11 @@ export default function Admin({ user: currentUser }) {
                                         <div
                                             key={type.id}
                                             onClick={() => setSelectedChecklistTypeId(type.id)}
-                                            className="group bg-white rounded-2xl border border-slate-200/80 hover:border-blue-400 hover:shadow-md transition cursor-pointer p-5 flex flex-col justify-between space-y-4"
+                                            className="group bg-white rounded-2xl border border-slate-200/80 hover:border-slate-400 hover:shadow-md transition cursor-pointer p-5 flex flex-col justify-between space-y-4"
                                         >
                                             <div className="space-y-3">
                                                 <div className="flex items-start justify-between gap-2">
-                                                    <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg group-hover:bg-blue-600 group-hover:text-white transition">
+                                                    <div className="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-lg group-hover:bg-slate-800 group-hover:text-white transition">
                                                         <LuShieldCheck className="w-6 h-6" />
                                                     </div>
                                                     <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
@@ -687,9 +687,9 @@ export default function Admin({ user: currentUser }) {
                                                 </div>
 
                                                 <div>
-                                                    <h3 className="font-extrabold text-base text-slate-900 group-hover:text-blue-600 transition flex items-center gap-1.5">
+                                                    <h3 className="font-extrabold text-base text-slate-900 group-hover:text-slate-700 transition flex items-center gap-1.5">
                                                         <span>{type.name}</span>
-                                                        <LuChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition" />
+                                                        <LuChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition" />
                                                     </h3>
                                                     <p className="text-xs text-slate-500 flex items-center gap-1 mt-1">
                                                         <LuClock className="w-3.5 h-3.5" />
@@ -708,7 +708,7 @@ export default function Admin({ user: currentUser }) {
                                                     </span>
                                                 </div>
 
-                                                <span className="text-xs font-bold text-blue-600 group-hover:underline">
+                                                <span className="text-xs font-bold text-slate-800 group-hover:underline">
                                                     Kelola →
                                                 </span>
                                             </div>
@@ -737,7 +737,7 @@ export default function Admin({ user: currentUser }) {
                                             <h2 className="font-extrabold text-base sm:text-lg text-slate-900">
                                                 Checklist {selectedAssetType.name}
                                             </h2>
-                                            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                                            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-300">
                                                 {filteredChecklists.length} Pertanyaan
                                             </span>
                                         </div>
@@ -759,7 +759,7 @@ export default function Admin({ user: currentUser }) {
                                         });
                                         setShowAddChecklistModal(true);
                                     }}
-                                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-xs shrink-0 cursor-pointer"
+                                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition shadow-xs shrink-0 cursor-pointer"
                                 >
                                     <LuPlus className="w-4 h-4" />
                                     <span>Tambah Poin Checklist</span>
@@ -789,7 +789,7 @@ export default function Admin({ user: currentUser }) {
                                                 });
                                                 setShowAddChecklistModal(true);
                                             }}
-                                            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition shadow-xs cursor-pointer"
+                                            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold hover:bg-slate-900 transition shadow-xs cursor-pointer"
                                         >
                                             <LuPlus className="w-4 h-4" />
                                             <span>Tambah Poin Pertama</span>
@@ -849,7 +849,7 @@ export default function Admin({ user: currentUser }) {
                                                         <button
                                                             onClick={() => startEditChecklist(item)}
                                                             title="Ubah pertanyaan checklist"
-                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                                                            className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition cursor-pointer"
                                                         >
                                                             <LuPencil className="w-3.5 h-3.5" />
                                                         </button>
@@ -886,7 +886,7 @@ export default function Admin({ user: currentUser }) {
                                 value={userSearch}
                                 onChange={(e) => setUserSearch(e.target.value)}
                                 placeholder="Cari nama atau email petugas..."
-                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                         </div>
 
@@ -935,7 +935,7 @@ export default function Admin({ user: currentUser }) {
                                                     className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
                                                         isAdmin
                                                             ? 'bg-purple-100 text-purple-700'
-                                                            : 'bg-blue-100 text-blue-700'
+                                                            : 'bg-slate-200 text-slate-800'
                                                     }`}
                                                 >
                                                     {u.name?.charAt(0).toUpperCase() || 'U'}
@@ -970,7 +970,7 @@ export default function Admin({ user: currentUser }) {
                                                     className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${
                                                         isAdmin
                                                             ? 'bg-purple-50 text-purple-700 border-purple-200'
-                                                            : 'bg-blue-50 text-blue-700 border-blue-200'
+                                                            : 'bg-slate-100 text-slate-800 border border-slate-300'
                                                     }`}
                                                 >
                                                     {isAdmin ? 'Administrator' : 'Petugas Lapangan'}
@@ -995,7 +995,7 @@ export default function Admin({ user: currentUser }) {
                                                 <button
                                                     onClick={() => startEditUser(u)}
                                                     title="Ubah data atau reset password"
-                                                    className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition"
+                                                    className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
                                                 >
                                                     <LuPencil className="w-3.5 h-3.5" />
                                                 </button>
@@ -1026,7 +1026,7 @@ export default function Admin({ user: currentUser }) {
                     {/* Area Management */}
                     <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 space-y-4">
                         <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <LuMapPin className="w-4 h-4 text-blue-600" />
+                            <LuMapPin className="w-4 h-4 text-slate-700" />
                             <span>Master Area Penempatan</span>
                         </h2>
 
@@ -1037,7 +1037,7 @@ export default function Admin({ user: currentUser }) {
                                 value={areaForm.name}
                                 onChange={(e) => setAreaForm({ name: e.target.value })}
                                 placeholder="Nama Area baru (misal: Gedung B Lantai 2)..."
-                                className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                             <button
                                 type="submit"
@@ -1074,7 +1074,7 @@ export default function Admin({ user: currentUser }) {
                     {/* Asset Types Management */}
                     <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 space-y-4">
                         <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <LuShieldCheck className="w-4 h-4 text-blue-600" />
+                            <LuShieldCheck className="w-4 h-4 text-slate-700" />
                             <span>Master Jenis Alat Keselamatan</span>
                         </h2>
 
@@ -1085,7 +1085,7 @@ export default function Admin({ user: currentUser }) {
                                 value={typeForm.name}
                                 onChange={(e) => setTypeForm({ ...typeForm, name: e.target.value })}
                                 placeholder="Nama jenis (misal: Hydrant Box, Kotak P3K)..."
-                                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                             />
                             <div className="flex gap-2">
                                 <input
@@ -1095,7 +1095,7 @@ export default function Admin({ user: currentUser }) {
                                     value={typeForm.inspection_interval_days}
                                     onChange={(e) => setTypeForm({ ...typeForm, inspection_interval_days: parseInt(e.target.value) || 30 })}
                                     placeholder="Interval cek (hari)"
-                                    className="w-40 px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-40 px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                                 <button
                                     type="submit"
@@ -1144,7 +1144,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Contoh: APAR-A1-002"
                                     value={assetForm.code}
                                     onChange={(e) => setAssetForm({ ...assetForm, code: e.target.value.toUpperCase() })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1155,7 +1155,7 @@ export default function Admin({ user: currentUser }) {
                                         required
                                         value={assetForm.asset_type_id}
                                         onChange={(e) => setAssetForm({ ...assetForm, asset_type_id: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="">Pilih Jenis</option>
                                         {types.map((t) => (
@@ -1169,7 +1169,7 @@ export default function Admin({ user: currentUser }) {
                                         required
                                         value={assetForm.area_id}
                                         onChange={(e) => setAssetForm({ ...assetForm, area_id: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="">Pilih Area</option>
                                         {areas.map((a) => (
@@ -1186,7 +1186,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Misal: Dekat tangga darurat barat / samping panel listrik"
                                     value={assetForm.location_note}
                                     onChange={(e) => setAssetForm({ ...assetForm, location_note: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1196,7 +1196,7 @@ export default function Admin({ user: currentUser }) {
                                     type="date"
                                     value={assetForm.expiry_date}
                                     onChange={(e) => setAssetForm({ ...assetForm, expiry_date: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                 />
                             </div>
 
@@ -1210,7 +1210,7 @@ export default function Admin({ user: currentUser }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition"
+                                    className="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition"
                                 >
                                     Daftarkan Alat
                                 </button>
@@ -1227,7 +1227,7 @@ export default function Admin({ user: currentUser }) {
                         <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <LuClipboardCheck className="w-5 h-5 text-blue-600" />
+                                    <LuClipboardCheck className="w-5 h-5 text-slate-700" />
                                     <span>Tambah Poin Checklist</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Pertanyaan pemeriksaan terikat dengan jenis alat</p>
@@ -1247,7 +1247,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={checklistForm.asset_type_id}
                                     onChange={(e) => setChecklistForm({ ...checklistForm, asset_type_id: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                 >
                                     <option value="">Pilih Jenis Alat</option>
                                     {types.map((t) => (
@@ -1264,7 +1264,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Contoh: Selang tidak retak / tersumbat"
                                     value={checklistForm.label}
                                     onChange={(e) => setChecklistForm({ ...checklistForm, label: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1275,7 +1275,7 @@ export default function Admin({ user: currentUser }) {
                                         required
                                         value={checklistForm.input_type}
                                         onChange={(e) => setChecklistForm({ ...checklistForm, input_type: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="yes_no">Pilihan Ya / Tidak</option>
                                         <option value="number">Angka (Nilai Ukur)</option>
@@ -1289,7 +1289,7 @@ export default function Admin({ user: currentUser }) {
                                         placeholder="ya"
                                         value={checklistForm.ok_value}
                                         onChange={(e) => setChecklistForm({ ...checklistForm, ok_value: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                     />
                                 </div>
                             </div>
@@ -1302,7 +1302,7 @@ export default function Admin({ user: currentUser }) {
                                         min="1"
                                         value={checklistForm.sort_order}
                                         onChange={(e) => setChecklistForm({ ...checklistForm, sort_order: parseInt(e.target.value) || 1 })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                     />
                                 </div>
                                 <div className="pt-5">
@@ -1311,7 +1311,7 @@ export default function Admin({ user: currentUser }) {
                                             type="checkbox"
                                             checked={checklistForm.required}
                                             onChange={(e) => setChecklistForm({ ...checklistForm, required: e.target.checked })}
-                                            className="w-4 h-4 text-blue-600 rounded"
+                                            className="w-4 h-4 text-slate-800 rounded"
                                         />
                                         <span>Wajib Diisi Petugas</span>
                                     </label>
@@ -1328,7 +1328,7 @@ export default function Admin({ user: currentUser }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition"
+                                    className="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition"
                                 >
                                     Tambahkan Poin
                                 </button>
@@ -1345,7 +1345,7 @@ export default function Admin({ user: currentUser }) {
                         <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <LuPencil className="w-5 h-5 text-blue-600" />
+                                    <LuPencil className="w-5 h-5 text-slate-700" />
                                     <span>Ubah Poin Checklist</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Edit pertanyaan atau ubah standar kondisi OK</p>
@@ -1365,7 +1365,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={editChecklistForm.asset_type_id}
                                     onChange={(e) => setEditChecklistForm({ ...editChecklistForm, asset_type_id: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                 >
                                     {types.map((t) => (
                                         <option key={t.id} value={t.id}>{t.name}</option>
@@ -1380,7 +1380,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={editChecklistForm.label}
                                     onChange={(e) => setEditChecklistForm({ ...editChecklistForm, label: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1391,7 +1391,7 @@ export default function Admin({ user: currentUser }) {
                                         required
                                         value={editChecklistForm.input_type}
                                         onChange={(e) => setEditChecklistForm({ ...editChecklistForm, input_type: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="yes_no">Pilihan Ya / Tidak</option>
                                         <option value="number">Angka (Nilai Ukur)</option>
@@ -1404,7 +1404,7 @@ export default function Admin({ user: currentUser }) {
                                         type="text"
                                         value={editChecklistForm.ok_value}
                                         onChange={(e) => setEditChecklistForm({ ...editChecklistForm, ok_value: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                     />
                                 </div>
                             </div>
@@ -1417,7 +1417,7 @@ export default function Admin({ user: currentUser }) {
                                         min="1"
                                         value={editChecklistForm.sort_order}
                                         onChange={(e) => setEditChecklistForm({ ...editChecklistForm, sort_order: parseInt(e.target.value) || 1 })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                     />
                                 </div>
                                 <div>
@@ -1425,7 +1425,7 @@ export default function Admin({ user: currentUser }) {
                                     <select
                                         value={editChecklistForm.is_active ? '1' : '0'}
                                         onChange={(e) => setEditChecklistForm({ ...editChecklistForm, is_active: e.target.value === '1' })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="1">Aktif</option>
                                         <option value="0">Nonaktif</option>
@@ -1439,7 +1439,7 @@ export default function Admin({ user: currentUser }) {
                                         type="checkbox"
                                         checked={editChecklistForm.required}
                                         onChange={(e) => setEditChecklistForm({ ...editChecklistForm, required: e.target.checked })}
-                                        className="w-4 h-4 text-blue-600 rounded"
+                                        className="w-4 h-4 text-slate-800 rounded"
                                     />
                                     <span>Wajib Diisi Petugas</span>
                                 </label>
@@ -1455,7 +1455,7 @@ export default function Admin({ user: currentUser }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition"
+                                    className="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition"
                                 >
                                     Simpan Perubahan
                                 </button>
@@ -1472,7 +1472,7 @@ export default function Admin({ user: currentUser }) {
                         <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <LuUserPlus className="w-5 h-5 text-blue-600" />
+                                    <LuUserPlus className="w-5 h-5 text-slate-700" />
                                     <span>Tambah Petugas / Pengguna Baru</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Daftarkan personel yang memiliki akses ke sistem FEMS</p>
@@ -1494,7 +1494,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Contoh: Budi Santoso"
                                     value={userForm.name}
                                     onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1506,7 +1506,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="budi@perusahaan.com"
                                     value={userForm.email}
                                     onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1516,7 +1516,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={userForm.role}
                                     onChange={(e) => setUserForm({ ...userForm, role: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                 >
                                     <option value="officer">Petugas Lapangan</option>
                                     <option value="admin">Administrator</option>
@@ -1532,7 +1532,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Minimal 8 karakter"
                                     value={userForm.password}
                                     onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1546,7 +1546,7 @@ export default function Admin({ user: currentUser }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition"
+                                    className="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition"
                                 >
                                     Daftarkan
                                 </button>
@@ -1563,7 +1563,7 @@ export default function Admin({ user: currentUser }) {
                         <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                             <div>
                                 <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <LuPencil className="w-5 h-5 text-blue-600" />
+                                    <LuPencil className="w-5 h-5 text-slate-700" />
                                     <span>Ubah Data Pengguna</span>
                                 </h3>
                                 <p className="text-xs text-slate-600 mt-0.5">Edit detail akun, role, atau ganti kata sandi</p>
@@ -1584,7 +1584,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={editUserForm.name}
                                     onChange={(e) => setEditUserForm({ ...editUserForm, name: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1595,7 +1595,7 @@ export default function Admin({ user: currentUser }) {
                                     required
                                     value={editUserForm.email}
                                     onChange={(e) => setEditUserForm({ ...editUserForm, email: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1606,7 +1606,7 @@ export default function Admin({ user: currentUser }) {
                                         required
                                         value={editUserForm.role}
                                         onChange={(e) => setEditUserForm({ ...editUserForm, role: e.target.value })}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white"
                                     >
                                         <option value="officer">Petugas Lapangan</option>
                                         <option value="admin">Administrator</option>
@@ -1618,7 +1618,7 @@ export default function Admin({ user: currentUser }) {
                                         value={editUserForm.is_active ? '1' : '0'}
                                         onChange={(e) => setEditUserForm({ ...editUserForm, is_active: e.target.value === '1' })}
                                         disabled={editingUser.id === currentUser?.id}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white disabled:opacity-60"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500 bg-white disabled:opacity-60"
                                     >
                                         <option value="1">Aktif</option>
                                         <option value="0">Nonaktif</option>
@@ -1637,7 +1637,7 @@ export default function Admin({ user: currentUser }) {
                                     placeholder="Ketik password baru (min 8 karakter)..."
                                     value={editUserForm.password}
                                     onChange={(e) => setEditUserForm({ ...editUserForm, password: e.target.value })}
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500/20 focus:border-slate-500"
                                 />
                             </div>
 
@@ -1651,7 +1651,7 @@ export default function Admin({ user: currentUser }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition"
+                                    className="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition"
                                 >
                                     Simpan Perubahan
                                 </button>

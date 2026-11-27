@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#334155">
     <title>Facilities & Equipment Monitoring System — PT Yahata</title>
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 </head>
-<body class="h-full text-slate-800 antialiased font-sans selection:bg-blue-600 selection:text-white bg-slate-50">
+<body class="h-full text-slate-800 antialiased font-sans selection:bg-slate-700 selection:text-white bg-slate-50">
     <div id="app" class="min-h-full flex flex-col"></div>
 </body>
 </html>

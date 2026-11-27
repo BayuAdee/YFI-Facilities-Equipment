@@ -22,7 +22,7 @@ export default function BottomNav({ user, onLogout, onOpenScanner }) {
                 <Link
                     to="/dashboard"
                     className={`flex flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition ${
-                        isActive('/dashboard') ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-slate-900'
+                        isActive('/dashboard') ? 'text-slate-900 font-bold' : 'text-slate-600 hover:text-slate-900'
                     }`}
                 >
                     <LuLayoutDashboard className="w-5 h-5" />
@@ -33,9 +33,9 @@ export default function BottomNav({ user, onLogout, onOpenScanner }) {
                 <button
                     type="button"
                     onClick={onOpenScanner}
-                    className="flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-blue-600 hover:text-blue-700 active:scale-95 transition"
+                    className="flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-slate-800 hover:text-slate-900 active:scale-95 transition"
                 >
-                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-200/80 shadow-2xs">
+                    <div className="w-8 h-8 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center border border-slate-300 shadow-2xs">
                         <LuScanQrCode className="w-4 h-4" />
                     </div>
                     <span>Scan QR</span>
@@ -46,7 +46,7 @@ export default function BottomNav({ user, onLogout, onOpenScanner }) {
                     <Link
                         to="/admin"
                         className={`flex flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition ${
-                            isActive('/admin') ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-slate-900'
+                            isActive('/admin') ? 'text-slate-900 font-bold' : 'text-slate-600 hover:text-slate-900'
                         }`}
                     >
                         <LuSettings className="w-5 h-5" />
@@ -68,7 +68,7 @@ export default function BottomNav({ user, onLogout, onOpenScanner }) {
                     <Link
                         to="/login"
                         className={`flex flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition ${
-                            isActive('/login') ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-slate-900'
+                            isActive('/login') ? 'text-slate-900 font-bold' : 'text-slate-600 hover:text-slate-900'
                         }`}
                     >
                         <LuLogIn className="w-5 h-5" />

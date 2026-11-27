@@ -74,12 +74,12 @@ export default function PublicAsset({ user }) {
         <div className="max-w-3xl mx-auto space-y-6">
             {/* Hero Card */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 sm:p-7 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50/50 to-transparent rounded-bl-full pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-100/60 to-transparent rounded-bl-full pointer-events-none" />
 
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200/60">
+                            <span className="text-xs font-bold uppercase tracking-wider text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-300">
                                 {data.type || 'Alat Keselamatan'}
                             </span>
                             <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
@@ -105,7 +105,7 @@ export default function PublicAsset({ user }) {
                         <StatusBadge status={data.status} size="lg" />
                         <button
                             onClick={() => setShowQrModal(true)}
-                            className="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-blue-700 transition"
+                            className="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 transition"
                         >
                             <LuQrCode className="w-3.5 h-3.5" />
                             <span>Lihat Kode QR</span>
@@ -147,7 +147,7 @@ export default function PublicAsset({ user }) {
                 <div className="mt-6">
                     <Link
                         to={`/inspeksi/${token}`}
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 text-white font-bold text-base hover:bg-blue-700 transition shadow-sm shadow-blue-500/25 active:scale-[0.99]"
+                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 text-white font-bold text-base hover:bg-slate-900 transition shadow-xs active:scale-[0.99]"
                     >
                         <LuClipboardCheck className="w-5 h-5" />
                         <span>Mulai Inspeksi Alat Ini</span>

@@ -42,13 +42,15 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
             {/* Header / Brand */}
             <div className="p-5 border-b border-slate-100 flex items-center justify-between">
                 <Link to="/dashboard" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shadow-blue-500/20 group-hover:bg-blue-700 transition shrink-0">
-                        <LuShieldCheck className="w-6 h-6" />
-                    </div>
+                    <img
+                        src="/logo.jpg"
+                        alt="Logo FEMS Yahata"
+                        className="w-10 h-10 rounded-xl object-contain bg-white border border-slate-200/80 shadow-2xs p-0.5 shrink-0"
+                    />
                     <div className="flex flex-col min-w-0">
                         <div className="flex items-center gap-1.5">
                             <span className="font-extrabold text-base tracking-tight text-slate-900">FEMS</span>
-                            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-blue-50 text-blue-700 border border-blue-200/60 uppercase tracking-wide">
+                            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-800 border border-slate-300 uppercase tracking-wide">
                                 Yahata
                             </span>
                         </div>
@@ -64,7 +66,7 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                 <button
                     type="button"
                     onClick={onOpenScanner}
-                    className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs font-bold shadow-xs hover:shadow-md transition cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-xs hover:shadow-md transition cursor-pointer"
                 >
                     <LuScanQrCode className="w-4 h-4" />
                     <span>Scan Barcode / QR</span>
@@ -88,11 +90,11 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                                     to={item.path}
                                     className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
                                         active
-                                            ? 'bg-blue-50 text-blue-700 font-bold shadow-2xs'
+                                            ? 'bg-slate-100 text-slate-900 font-bold shadow-2xs'
                                             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
                                     }`}
                                 >
-                                    <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-blue-600' : 'text-slate-500'}`} />
+                                    <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-slate-900' : 'text-slate-500'}`} />
                                     <span>{item.label}</span>
                                 </Link>
                             );
@@ -116,11 +118,11 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                                         to={item.path}
                                         className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
                                             active
-                                                ? 'bg-blue-50 text-blue-700 font-bold shadow-2xs'
+                                                ? 'bg-slate-100 text-slate-900 font-bold shadow-2xs'
                                                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
                                         }`}
                                     >
-                                        <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-blue-600' : 'text-slate-500'}`} />
+                                        <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-slate-900' : 'text-slate-500'}`} />
                                         <span>{item.label}</span>
                                     </Link>
                                 );
@@ -136,7 +138,7 @@ export default function Sidebar({ user, onLogout, onOpenScanner }) {
                     <div className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200/80 shadow-2xs">
                         <div className="flex items-center gap-2.5 min-w-0">
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                                isAdmin ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
+                                isAdmin ? 'bg-purple-100 text-purple-700' : 'bg-slate-200 text-slate-800'
                             }`}>
                                 {user.name?.charAt(0).toUpperCase() || 'U'}
                             </div>
